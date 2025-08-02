@@ -31,3 +31,5 @@ esp32:
 psram:
   mode: octal
   speed: 80MHz
+
+logger:
