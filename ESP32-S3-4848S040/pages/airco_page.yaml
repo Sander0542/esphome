@@ -245,8 +245,7 @@ lvgl:
               - obj:
                   id: air_conditioner_target_temp_display
                   align: CENTER
-                  # width: 140
-                  # height: 120
+                  width: 120
                   bg_opa: TRANSP
                   border_opa: TRANSP
                   border_width: 0
@@ -263,8 +262,8 @@ lvgl:
                         bg_color: color_red
                     - label:
                         id: air_conditioner_target_temperature_fraction
-                        x: -10
-                        y: 15
+                        x: -8
+                        y: 11
                         align: RIGHT_MID
                         text_font: roboto_30
                         text_color: color_misty_blue
@@ -272,8 +271,8 @@ lvgl:
                         bg_color: color_blue
                     - label:
                         id: air_conditioner_target_temperature_measurement
-                        x: -12
-                        y: -20
+                        x: -10
+                        y: -16
                         align: RIGHT_MID
                         text_font: roboto_24
                         text_color: color_misty_blue
