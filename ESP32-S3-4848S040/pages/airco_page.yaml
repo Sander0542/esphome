@@ -260,6 +260,7 @@ lvgl:
                         text_font: roboto_64
                         text_color: color_misty_blue
                         text: "20"
+                        bg_color: color_red
                     - label:
                         id: air_conditioner_target_temperature_fraction
                         x: -10
@@ -268,6 +269,7 @@ lvgl:
                         text_font: roboto_30
                         text_color: color_misty_blue
                         text: ",0"
+                        bg_color: color_blue
                     - label:
                         id: air_conditioner_target_temperature_measurement
                         x: -12
@@ -276,6 +278,7 @@ lvgl:
                         text_font: roboto_24
                         text_color: color_misty_blue
                         text: "°C"
+                        bg_color: color_green
 
               # - arc:
               #     id: air_conditioner_arc_current_temp
