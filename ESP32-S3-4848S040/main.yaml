@@ -5,6 +5,7 @@ packages:
   color: !include assets/color.yaml
 
 esphome:
+  name: ESP32-S3-4848S040
   includes:
     - <sstream>
     - <algorithm>
