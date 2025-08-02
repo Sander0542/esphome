@@ -1,5 +1,6 @@
 packages:
   display: !include display.yaml
+  pages: !include pages.yaml
   image: !include assets/image.yaml
   font: !include assets/font.yaml
   color: !include assets/color.yaml

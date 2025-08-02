@@ -58,7 +58,7 @@ script:
     then:
       - lambda: |-
           lv_label_set_text(id(boot_homeassistant_label), "Synchronization...");
-      - delay: 2500ms
+      # - delay: 2500ms
       - lambda: |-
           if (id(ha_connected)) {
             lv_obj_add_flag(id(loading_page), LV_OBJ_FLAG_HIDDEN);

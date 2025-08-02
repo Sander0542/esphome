@@ -1,5 +1,7 @@
 substitutions:
   air_conditioner_entity: "climate.airco"
+  air_conditioner_min_temp: 15
+  air_conditioner_max_temp: 30
 
 lvgl:
   pages:
@@ -63,7 +65,7 @@ lvgl:
 
         - obj:
             id: air_conditioner_bg_main
-            width: 160
+            width: 300
             height: 300
             y: 80
             align: TOP_RIGHT
@@ -75,116 +77,205 @@ lvgl:
             shadow_opa: TRANSP
             radius: 10
             widgets:
-              - obj:
-                  id: air_conditioner_bg_placeholder
-                  radius: 150
-                  x: 125
-                  width: 300
-                  height: 300
-                  align: RIGHT_MID
-                  bg_color: color_slate_blue_gray
-                  pad_all: 0
-                  border_opa: TRANSP
-                  border_width: 0
-                  shadow_opa: TRANSP
+              # - obj:
+              #     id: air_conditioner_bg_placeholder
+              #     radius: 150
+              #     x: 125
+              #     width: 300
+              #     height: 300
+              #     align: CENTER
+              #     bg_color: color_slate_blue_gray
+              #     pad_all: 0
+              #     border_opa: TRANSP
+              #     border_width: 0
+              #     shadow_opa: TRANSP
 
-              - obj:
-                  id: air_conditioner_temp_arc_bg
-                  radius: 130
-                  x: 120
-                  width: 260
-                  height: 260
-                  align: RIGHT_MID
-                  bg_color: color_sky_blue
-                  pad_all: 0
-                  border_opa: TRANSP
-                  border_width: 0
-                  shadow_opa: TRANSP
+              # - obj:
+              #     id: air_conditioner_temp_arc_bg
+              #     radius: 130
+              #     x: 120
+              #     width: 260
+              #     height: 260
+              #     align: RIGHT_MID
+              #     bg_color: color_sky_blue
+              #     pad_all: 0
+              #     border_opa: TRANSP
+              #     border_width: 0
+              #     shadow_opa: TRANSP
 
-              - meter:
-                  id: air_conditioner_meter
-                  x: 100
-                  height: 220
-                  width: 220
-                  border_width: 0
-                  bg_color: color_slate_blue_gray
-                  align: RIGHT_MID
-                  text_color: color_steel_blue
-                  scales:
-                    - range_from: 15
-                      range_to: 30
-                      angle_range: 160
-                      rotation: 100.0
-                      ticks:
-                        width: 1
-                        count: 21
-                        length: 10
-                        color: color_white
-                        major:
-                          stride: 5
-                          width: 5
-                          length: 15
-                          color: color_white
-                          label_gap: 15
-                      indicators:
-                        - tick_style:
-                            start_value: 15
-                            end_value: 30
-                            color_start: 0x000080
-                            color_end: 0x99CCFF
-                            width: 1
+              # - meter:
+              #     id: air_conditioner_meter
+              #     x: 100
+              #     height: 220
+              #     width: 220
+              #     border_width: 0
+              #     bg_color: color_slate_blue_gray
+              #     align: RIGHT_MID
+              #     text_color: color_steel_blue
+              #     scales:
+              #       - range_from: 15
+              #         range_to: 30
+              #         angle_range: 160
+              #         rotation: 100.0
+              #         ticks:
+              #           width: 1
+              #           count: 21
+              #           length: 10
+              #           color: color_white
+              #           major:
+              #             stride: 5
+              #             width: 5
+              #             length: 15
+              #             color: color_white
+              #             label_gap: 15
+              #         indicators:
+              #           - tick_style:
+              #               start_value: 15
+              #               end_value: 30
+              #               color_start: 0x000080
+              #               color_end: 0x99CCFF
+              #               width: 1
+
+              # - arc:
+              #     id: air_conditioner_arc_main
+              #     align: RIGHT_MID
+              #     arc_width: 20
+              #     x: 125
+              #     width: 270
+              #     height: 270
+              #     min_value: 15
+              #     max_value: 30
+              #     adjustable: true
+              #     adv_hittest: true
+              #     rotation: 90.0
+              #     start_angle: 10
+              #     end_angle: 170
+              #     arc_opa: TRANSP
+              #     indicator:
+              #       arc_opa: TRANSP
+              #       arc_width: 30
+              #     knob:
+              #       border_color: color_white
+              #       border_width: 5
+              #       bg_opa: TRANSP
+              #     on_release:
+              #       - homeassistant.service:
+              #           service: climate.set_temperature
+              #           data:
+              #             entity_id: "${air_conditioner_entity}"
+              #             temperature: !lambda return x;
+
+              # - arc:
+              #     id: air_conditioner_arc_current_temp
+              #     clickable: false
+              #     align: RIGHT_MID
+              #     arc_width: 50
+              #     x: 125
+              #     width: 260
+              #     height: 260
+              #     min_value: 15
+              #     max_value: 30
+              #     adjustable: true
+              #     adv_hittest: true
+              #     rotation: 90.0
+              #     start_angle: 10
+              #     end_angle: 170
+              #     arc_opa: TRANSP
+              #     indicator:
+              #       arc_opa: TRANSP
+              #     knob:
+              #       bg_color: color_white
+              #       border_width: 0
+              #       border_opa: TRANSP
 
               - arc:
                   id: air_conditioner_arc_main
-                  align: RIGHT_MID
+                  align: CENTER
                   arc_width: 20
-                  x: 125
-                  width: 270
-                  height: 270
-                  min_value: 15
-                  max_value: 30
-                  adjustable: true
+                  height: 260
+                  width: 260
+                  min_value: ${air_conditioner_min_temp}
+                  max_value: ${air_conditioner_max_temp}
+                  value: ${air_conditioner_max_temp}
                   adv_hittest: true
-                  rotation: 90.0
-                  start_angle: 10
-                  end_angle: 170
-                  arc_opa: TRANSP
+                  arc_color: color_sky_blue
                   indicator:
                     arc_opa: TRANSP
-                    arc_width: 30
-                  knob:
-                    border_color: color_white
-                    border_width: 5
-                    bg_opa: TRANSP
-                  on_release:
-                    - homeassistant.service:
-                        service: climate.set_temperature
-                        data:
-                          entity_id: "${air_conditioner_entity}"
-                          temperature: !lambda return x;
+                    arc_width: 20
 
               - arc:
                   id: air_conditioner_arc_current_temp
                   clickable: false
-                  align: RIGHT_MID
-                  arc_width: 10
-                  x: 125
-                  width: 260
+                  align: CENTER
+                  arc_width: 20
                   height: 260
-                  min_value: 15
-                  max_value: 30
-                  adjustable: true
+                  width: 260
+                  min_value: ${air_conditioner_min_temp}
+                  max_value: ${air_conditioner_max_temp}
                   adv_hittest: true
-                  rotation: 90.0
-                  start_angle: 10
-                  end_angle: 170
                   arc_opa: TRANSP
+                  adjustable: true
                   indicator:
                     arc_opa: TRANSP
+                    arc_width: 20
                   knob:
                     bg_color: color_white
                     border_width: 0
-                    border_opa: TRANSP
+                    pad_all: -5
+
+              - arc:
+                  id: air_conditioner_arc_target_temp
+                  align: CENTER
+                  arc_width: 20
+                  height: 260
+                  width: 260
+                  min_value: ${air_conditioner_min_temp}
+                  max_value: ${air_conditioner_max_temp}
+                  adv_hittest: true
+                  arc_opa: TRANSP
+                  adjustable: true
+                  indicator:
+                    arc_opa: TRANSP
+                    arc_width: 20
+                  knob:
+                    bg_color: color_white
+                    border_width: 5
+                    border_color: color_misty_blue
+
+              - obj:
+                  id: air_conditioner_target_temp_display
+                  align: CENTER
+                  # width: 140
+                  # height: 120
+                  bg_opa: TRANSP
+                  border_opa: TRANSP
+                  border_width: 0
+                  shadow_opa: TRANSP
+                  widgets:
+                    - label:
+                        id: air_conditioner_target_temperature_whole
+                        x: -40
+                        y: 0
+                        align: RIGHT_MID
+                        text_font: roboto_64
+                        text_color: color_misty_blue
+                        text: "20"
+                    - label:
+                        id: air_conditioner_target_temperature_fraction
+                        x: -10
+                        y: 15
+                        align: RIGHT_MID
+                        text_font: roboto_30
+                        text_color: color_misty_blue
+                        text: ",0"
+                    - label:
+                        id: air_conditioner_target_temperature_measurement
+                        x: -12
+                        y: -20
+                        align: RIGHT_MID
+                        text_font: roboto_24
+                        text_color: color_misty_blue
+                        text: "°C"
 
               # - arc:
               #     id: air_conditioner_arc_current_temp
@@ -475,7 +566,7 @@ text_sensor:
 #         - homeassistant.service:
 #             service: climate.set_hvac_mode
 #             data:
-#               entity_id: climate.airco
+#               entity_id: "${air_conditioner_entity}"
 #               hvac_mode: cool
 #   - platform: lvgl
 #     id: airco_off_btn_sensor
@@ -485,7 +576,7 @@ text_sensor:
 #         - homeassistant.service:
 #             service: climate.set_hvac_mode
 #             data:
-#               entity_id: climate.airco
+#               entity_id: "${air_conditioner_entity}"
 #               hvac_mode: "off"
 #   - platform: lvgl
 #     id: airco_heat_btn_sensor
@@ -495,7 +586,7 @@ text_sensor:
 #         - homeassistant.service:
 #             service: climate.set_hvac_mode
 #             data:
-#               entity_id: climate.airco
+#               entity_id: "${air_conditioner_entity}"
 #               hvac_mode: heat
 
 sensor:
@@ -508,3 +599,27 @@ sensor:
         - lvgl.arc.update:
             id: air_conditioner_arc_current_temp
             value: !lambda return x;
+  - platform: homeassistant
+    id: airco_target_temperature_state
+    entity_id: "${air_conditioner_entity}"
+    attribute: temperature
+    on_value:
+      then:
+        - lvgl.arc.update:
+            id: air_conditioner_arc_target_temp
+            value: !lambda return x;
+        - lvgl.label.update:
+            id: air_conditioner_target_temperature_whole
+            text: !lambda |-
+              static char buf[10];
+              int whole_part = static_cast<int>(id(airco_target_temperature_state).state);
+              snprintf(buf, 10, "%d", whole_part);
+              return buf;
+        - lvgl.label.update:
+            id: air_conditioner_target_temperature_fraction
+            text: !lambda |-
+              static char buf[10];
+              int whole_part = static_cast<int>(id(airco_target_temperature_state).state);
+              int fractional_part = static_cast<int>((id(airco_target_temperature_state).state - whole_part) * 10);
+              snprintf(buf, 10, ".%01d", fractional_part);
+              return buf;
