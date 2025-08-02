@@ -245,7 +245,7 @@ lvgl:
               - obj:
                   id: air_conditioner_target_temp_display
                   align: CENTER
-                  width: 100
+                  width: 140
                   bg_opa: TRANSP
                   border_opa: TRANSP
                   border_width: 0
