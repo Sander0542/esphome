@@ -5,6 +5,7 @@ packages:
   color: !include assets/color.yaml
 
 esphome:
+  name: esp32-s3-4848s040
   includes:
     - <sstream>
     - <algorithm>
@@ -30,3 +31,5 @@ esp32:
 psram:
   mode: octal
   speed: 80MHz
+
+logger:
