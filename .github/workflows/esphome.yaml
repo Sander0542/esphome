@@ -13,6 +13,7 @@ jobs:
     name: Build ${{ matrix.project }} (esphome-${{ matrix.esphome_version }})
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         esphome_version:
           - latest
