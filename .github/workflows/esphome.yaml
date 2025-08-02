@@ -1,0 +1,31 @@
+name: ESPHome
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build ${{ matrix.project }} (esphome-${{ matrix.esphome_version }})
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        esphome_version:
+          - latest
+          - stable
+          - dev
+        project: [ESP32-S3-4848S040]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build Firmware
+        uses: esphome/build-action@v7.0.0
+        id: esphome-build
+        with:
+          yaml-file: ${{ matrix.project }}/main.yaml
+          version: ${{ matrix.esphome_version }}
+          complete-manifest: true
