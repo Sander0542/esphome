@@ -22,7 +22,7 @@ jobs:
         project: [ESP32-S3-4848S040]
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Build Firmware
         uses: esphome/build-action@v7.0.0
         id: esphome-build
