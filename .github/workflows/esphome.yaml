@@ -22,9 +22,9 @@ jobs:
         project: [ESP32-S3-4848S040]
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@93cb6efe18208431cddfb8368fd83d5badbf9bfd # v5
       - name: Build Firmware
-        uses: esphome/build-action@v7.0.0
+        uses: esphome/build-action@76cd6898550762b189215bbe6e50e29080fd2c33 # v7.0.0
         id: esphome-build
         with:
           yaml-file: ${{ matrix.project }}/main.yaml
