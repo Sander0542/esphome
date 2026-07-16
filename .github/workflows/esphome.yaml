@@ -24,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
       - name: Build Firmware
-        uses: esphome/build-action@v7.0.0
+        uses: esphome/build-action@v7.4.0
         id: esphome-build
         with:
           yaml-file: ${{ matrix.project }}/main.yaml
